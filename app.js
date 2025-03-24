@@ -16,11 +16,11 @@ app.get("/", function (req, res) {
 
 app.get("/read", async function (req, res) {
   let users = await userModel.find();
-  res.render("read", { users : users });
+  res.render("read", { users: users });
 });
 
 app.get("/delete/:id", async function (req, res) {
-  let users = await userModel.findOneAndDelete({_id: req.params.id});
+  let users = await userModel.findOneAndDelete({ _id: req.params.id });
   res.redirect("/read");
 });
 
@@ -31,7 +31,7 @@ app.post("/create", async function (req, res) {
     name,
     email,
     imageUrl,
-  })
+  });
 
   res.redirect("/read");
 });
