@@ -24,6 +24,17 @@ app.get("/delete/:id", async function (req, res) {
   res.redirect("/read");
 });
 
+app.get("/edit/:id", async function (req, res) {
+  let users = await userModel.findOne({ _id: req.params.id });
+  res.render("edit", { users: users });
+});
+
+app.post("/update/:id", async function (req, res) {
+  let { name, email, imageUrl } = req.body;
+  let users = await userModel.findOneAndUpdate({ _id: req.params.id }, { name, email, imageUrl }, { new: true });
+  res.redirect("/read");
+});
+
 app.post("/create", async function (req, res) {
   let { name, email, imageUrl } = req.body;
 
